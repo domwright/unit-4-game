@@ -4,23 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Crystal Game</title>
-    <!--jQuery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!--javascript-->
-    <script src="assets/javascript/game.js" type="text/javascript"></script>
     <!--reset-->
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css">
 	<!--Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!--google font-->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <!--css-->
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
-
-
 </head>
     
-    <body>
+<body>
         <div class="container-fluid">
             <div class="jumbotron text-center">
                   <h1>The Crystal Collector</h1>
@@ -49,18 +41,89 @@
                             <div class="col-md-8 col-sm-12">
                                 <div class="panel panel-default">
                                     <div class="panel-body">
-                                        <h4>Number To Guess: <span id="mySpan"></span></h4>                                        <h4 class="wins">Wins:</h4>
-                                        <h4 class="losses">Losses:</h4>
-                                            <div id="imageCrystals">
-                                            
-                                            </div>  
-                                        <h4 id="userScore">Your total score is:</h4>                                                
+                                        <h4>Number To Guess: <span id="mySpan"></span></h4>  
+                                        <h4>Wins: <span id="wins"></span></h4>  
+                                        <h4>Losses: <span id="losses"></span></h4>  
+                                            <div id="crystalImages">  
+
+                                            </div>
+                                        <h4>Your total score is: <span id="userScore"></span></h4>  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                            
 
+<!-- JAVASCRIPT JQUERY -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+// variables
+var targetNumber = 72;
+var losses = 0;
+var wins = 0;
+var counter = 0;
+
+// appending targetNumber to html
+$("#mySpan").append(targetNumber);
+
+// GAME STARTS HERE
+var resetAndStart = function () {
+$("#crystalImages").empty();
+
+// array
+var numberOptions = [10, 5, 12, 2]
+
+// Loops
+for(var i = 0; i < numberOptions.length; i++) {
+console.log(numberOptions);
+
+// variable for crystals
+var crystalImage = $("<img>");
+
+// adding css to crystals and source link for crystals..also allowing the crystals to be reclicked once game resets
+crystalImage.addClass("crystalImages");
+crystalImage.attr("src", "file:///Users/dominiquewright/Documents/unit-4-game%20assignment%204/assets/images/purplecrystal.png");
+
+// giving each crystal a data attribute set equal to the array value above
+crystalImage.attr("data-crystalvalue", numberOptions[i]);
+
+// appending crystal image to html
+$("#crystalImages").append(crystalImage);
+}
+}
+
+resetAndStart();
+
+// on click function for each crystal & assigning values
+$(document).on('click', ".crystalImages", function() {
+
+// converting string to integer & adding each crystals value
+var sum = ($(this).attr('data-crystalvalue'));
+sum = parseInt(sum);
+counter += sum;
+$("#userScore").html("<h4>" + counter + "</h4>");
+
+console.log(sum);
+console.log(counter);
+
+if(counter > targetNumber) {
+console.log("You Lost!");
+losses++;
+$("#losses").html("<h4>" + losses + "</h4>");
+counter = 0;
+resetAndStart();
+}
+
+else if(counter === targetNumber){
+console.log("You Win!");
+wins++;
+$("#wins").html("<h4>" + wins + "</h4>");
+counter = 0;
+resetAndStart();
+}
+});
+</script>
 
 
 </body>

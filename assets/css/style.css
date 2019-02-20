@@ -1,0 +1,39 @@
+/* Crystal Game */
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background-image: url(../images/light-grey-terrazzo.png);
+}
+
+/* header */
+.jumbotron {
+    background-color: teal;
+    color: white;
+}
+
+/* header text */
+h1 {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-style: white;
+}
+
+p {
+    font-size: 20px;
+}
+
+.panel {
+    border: 2px solid teal;
+}
+
+h4 { 
+    font-size: 22px;
+}
+
+/* crystals */
+.crystalImages {
+    height: 125px;
+    width: 125px;
+    border: 1px solid purple;
+    margin: 15px;
+}
